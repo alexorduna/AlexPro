@@ -85,11 +85,15 @@ public:
         gruposPorTamanio[Tamanioh].push_back(nuevo);
 
         vector<Nodo*>& grupo = gruposPorTamanio[Tamanioh];
-        for (size_t i = 0; i < grupo.size() - 1; i++) {
-            if (grupo[i]->Nombreh == nuevo->Nombreh) {
-                grupo[i]->esDuplicado = true;
-                nuevo->esDuplicado = true;
+        if (grupo.size() > 1) {
+            for (size_t i = 0; i < grupo.size(); i++) {
+                if (grupo[i]->Nombreh == nuevo->Nombreh) {
+                    grupo[i]->esDuplicado = true;
+                    nuevo->esDuplicado = true;
+                }
             }
+            // Asegurar que el primer archivo no sea marcado como duplicado.
+            grupo[0]->esDuplicado = false;
         }
     }
 
